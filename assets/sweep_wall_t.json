@@ -2,7 +2,7 @@
  {
   "wall_t": 3,
   "mass_g": 43.2,
-  "f1_hz": 1132.1,
+  "f1_hz": 1201.1,
   "max_vm_MPa": 9.1,
   "safety_factor": 30.18,
   "max_disp_mm": 0.0101
