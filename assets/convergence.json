@@ -1,0 +1,30 @@
+[
+ {
+  "mesh_size": 4.0,
+  "n_elements": 4824,
+  "f1_hz": 1181.5,
+  "max_disp_mm": 0.0084,
+  "max_vm_MPa": 6.4
+ },
+ {
+  "mesh_size": 3.0,
+  "n_elements": 8770,
+  "f1_hz": 1180.0,
+  "max_disp_mm": 0.0084,
+  "max_vm_MPa": 8.0
+ },
+ {
+  "mesh_size": 2.0,
+  "n_elements": 24112,
+  "f1_hz": 1174.4,
+  "max_disp_mm": 0.0085,
+  "max_vm_MPa": 8.6
+ },
+ {
+  "mesh_size": 1.5,
+  "n_elements": 51269,
+  "f1_hz": 1173.1,
+  "max_disp_mm": 0.0085,
+  "max_vm_MPa": 9.7
+ }
+]
