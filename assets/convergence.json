@@ -10,8 +10,8 @@
   "mesh_size": 3.0,
   "n_elements": 8770,
   "f1_hz": 1180.0,
-  "max_disp_mm": 0.0069,
-  "max_vm_MPa": 196.2
+  "max_disp_mm": 0.0084,
+  "max_vm_MPa": 8.0
  },
  {
   "mesh_size": 2.0,

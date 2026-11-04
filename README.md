@@ -22,6 +22,15 @@ No commercial licence needed. Ask in plain language, e.g. *"Make the wall thinne
 | Max von Mises at 20 N thrust | 8.6 MPa (safety factor 32.2 vs 276 MPa yield) |
 | Modal f1 (default mesh, motor mass) | 1181.5 Hz |
 
+**Mesh convergence** (20 N thrust, motor mass 60 g):
+
+| Mesh size (mm) | Elements | f1 (Hz) | Max disp (mm) | Peak VM (MPa) |
+|---:|---:|---:|---:|---:|
+| 4.0 | 4 824 | 1181.5 | 0.0084 | 6.4 |
+| 3.0 | 8 770 | 1180.0 | 0.0084 | 8.0 |
+| 2.0 | 24 112 | 1174.4 | 0.0085 | 8.6 |
+| 1.5 | 51 269 | 1173.1 | 0.0085 | 9.7 |
+
 ## Quick start
 ```bash
 sudo apt install calculix-ccx          # or set CCX=/path/to/ccx
@@ -36,7 +45,10 @@ Claude Code: the repo ships `.mcp.json`. Claude Desktop: add
 ## MCP tools
 `set_design` · `get_design` · `run_modal` · `run_static` · `plot_mode_shape` · `plot_stress_field` · `parameter_sweep` · `mesh_convergence`
 
-**Known limitation:** peak von Mises at the fixed base-bolt holes keeps rising with refinement (6.4 → 9.7 MPa). That is a stress singularity from fully-fixed hole walls, not a converged value. Use displacement, frequency and stress *trends*; for real stress, model washer-face contact or bolt preload.
+**Known limitations:**
+
+- Peak von Mises at the fixed base-bolt holes keeps rising with refinement (6.4 → 9.7 MPa). That is a stress singularity from fully-fixed hole walls, not a converged value. Use displacement, frequency and stress *trends*; for real stress, model washer-face contact or bolt preload.
+- Gmsh meshing is non-deterministic. On rare runs, a poorly-shaped element near the singularity can produce a spurious peak VM one to two orders of magnitude above the typical value (e.g. 196 MPa vs ~8 MPa). Re-running regenerates a clean mesh. The convergence table above reflects a clean run.
 
 ## Modelling assumptions
 Units mm-t-N-s-MPa · base-hole walls fully fixed · motor = lumped mass spread over motor-bolt nodes (no rigid coupling) · linear elastic, small displacement · no fillets.
