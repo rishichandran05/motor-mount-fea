@@ -55,5 +55,3 @@ scripts/         demo + validation          tests/         pytest
 ## Credits
 
 Inspired by [vamshidharre/Modal_Analysis](https://github.com/vamshidharre/Modal_Analysis).
-
-Built by [Rishi Chandran](https://www.linkedin.com/in/YOUR_URL).
