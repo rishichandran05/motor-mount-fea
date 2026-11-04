@@ -7,6 +7,21 @@ No commercial licence needed. Ask in plain language, e.g. *"Make the wall thinne
 **Part:** fixed-wing / VTOL motor mount (L-bracket + gusset, 4× motor bolts on a 19 mm circle, 4× base bolts), Al 6061-T6.
 **Analyses:** modal (motor mass lumped on bolt nodes) and static (thrust + reaction torque), parameter sweep, mesh convergence.
 
+## Results
+
+| Mode 1 (torsion) | Mode 2 (bending) | Static stress field |
+|:-:|:-:|:-:|
+| ![Mode 1](assets/mode1.png) | ![Mode 2](assets/mode2.png) | ![Stress](assets/stress.png) |
+
+| Check | Result |
+|---|---|
+| Cantilever f1 vs Euler–Bernoulli | 409.6 vs 408.0 Hz (0.4 %) |
+| Reaction force vs applied thrust (20 N) | 20.000 N, error 0.000 N |
+| Linearity (2× load → 2× displacement) | pass (`pytest`) |
+| f1 mesh convergence (4824 → 51269 tets) | 1181.5 → 1173.1 Hz (0.7 % spread) |
+| Max von Mises at 20 N thrust | 8.6 MPa (safety factor 32.2 vs 276 MPa yield) |
+| Modal f1 (default mesh, motor mass) | 1181.5 Hz |
+
 ## Quick start
 ```bash
 sudo apt install calculix-ccx          # or set CCX=/path/to/ccx
@@ -20,14 +35,6 @@ Claude Code: the repo ships `.mcp.json`. Claude Desktop: add
 
 ## MCP tools
 `set_design` · `get_design` · `run_modal` · `run_static` · `plot_mode_shape` · `plot_stress_field` · `parameter_sweep` · `mesh_convergence`
-
-## Verification (measured in this repo)
-| Check | Result |
-|---|---|
-| Cantilever 100×10×5 mm, f1 vs Euler–Bernoulli | 409.6 vs 408.0 Hz (0.4 %) |
-| Reaction force vs applied thrust (20 N) | 20.000 N, error 0.000 N |
-| Linearity (2× load → 2× displacement) | pass (`pytest`) |
-| f1 mesh convergence, 4824 → 51269 tets | 1181.5 → 1173.1 Hz (0.7 % spread) |
 
 **Known limitation:** peak von Mises at the fixed base-bolt holes keeps rising with refinement (6.4 → 9.7 MPa). That is a stress singularity from fully-fixed hole walls, not a converged value. Use displacement, frequency and stress *trends*; for real stress, model washer-face contact or bolt preload.
 
@@ -44,3 +51,9 @@ fea/solver.py    ccx runner + .dat parser   fea/pipeline.py  MountModel API
 fea/plots.py     3D mode/stress plots       mcp_server/server.py  MCP tools
 scripts/         demo + validation          tests/         pytest
 ```
+
+## Credits
+
+Inspired by [vamshidharre/Modal_Analysis](https://github.com/vamshidharre/Modal_Analysis).
+
+Built by [Rishi Chandran](https://www.linkedin.com/in/YOUR_URL).
