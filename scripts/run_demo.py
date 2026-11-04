@@ -3,6 +3,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fea import MountModel
 from fea.plots import plot_mode, plot_stress
+from fea.export import export_static_vtu, export_modal_vtu
 
 out = Path(__file__).resolve().parents[1] / "assets"; out.mkdir(exist_ok=True)
 m = MountModel(workdir="runs/demo")
@@ -10,6 +11,7 @@ print(json.dumps(m.build(), indent=1))
 print(json.dumps(m.run_modal(6), indent=1))
 print(json.dumps(m.run_static(), indent=1))
 plot_mode(m, 1, out / "mode1.png"); plot_mode(m, 2, out / "mode2.png"); plot_stress(m, out / "stress.png")
+print('ParaView files:', export_static_vtu(m, 'results/static.vtu'), export_modal_vtu(m, 'results/modal.vtu'))
 conv = m.mesh_convergence()
 print("convergence", json.dumps(conv, indent=1))
 json.dump(conv, open(out / "convergence.json", "w"), indent=1)

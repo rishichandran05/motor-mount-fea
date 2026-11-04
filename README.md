@@ -50,6 +50,13 @@ Claude Code: the repo ships `.mcp.json`. Claude Desktop: add
 - Peak von Mises at the fixed base-bolt holes keeps rising with refinement (6.4 → 9.7 MPa). That is a stress singularity from fully-fixed hole walls, not a converged value. Use displacement, frequency and stress *trends*; for real stress, model washer-face contact or bolt preload.
 - Gmsh meshing is non-deterministic. On rare runs, a poorly-shaped element near the singularity can produce a spurious peak VM one to two orders of magnitude above the typical value (e.g. 196 MPa vs ~8 MPa). Re-running regenerates a clean mesh. The convergence table above reflects a clean run.
 
+## View results in ParaView (like LS-PrePost)
+`run_demo.py` writes `results/static.vtu` (displacement, von Mises) and `results/modal.vtu` (one field per mode, frequency in the name).
+1. Install [ParaView](https://www.paraview.org/download/) (free), then **File → Open → `results/static.vtu` → Apply**.
+2. Colour by `von_Mises_MPa` or `U_mag_mm` using the dropdown in the top toolbar.
+3. For deformation: **Filters → Alphabetical → Warp By Vector**, vector `U`, set the scale factor (e.g. 200), **Apply**.
+4. For vibration modes, open `modal.vtu` and warp by `mode_1_...Hz`. Animate by changing the scale factor.
+
 ## Modelling assumptions
 Units mm-t-N-s-MPa · base-hole walls fully fixed · motor = lumped mass spread over motor-bolt nodes (no rigid coupling) · linear elastic, small displacement · no fillets.
 
