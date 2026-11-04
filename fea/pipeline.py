@@ -6,6 +6,7 @@ import numpy as np
 from .geometry import MountParams, MATERIALS, build_mesh, mesh_mass_volume
 from .inp import write_inp
 from .solver import run_calculix, parse_dat
+from .export import export_static_vtu, export_modal_vtu
 
 
 class MountModel:

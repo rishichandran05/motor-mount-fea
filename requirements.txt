@@ -4,3 +4,4 @@ scipy
 matplotlib
 mcp>=1.2,<2
 pytest
+meshio
